@@ -11,40 +11,57 @@
       background-color: #f4f4f4;
       color: #333;
     }
-    header {
-      text-align: center;
-      background-color: #fff;
-      padding: 1rem 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
     .banner {
+      position: relative;
       width: 100%;
       height: 300px;
-      background: url('your-banner-image-url-here.jpg') no-repeat center center;
+      background: url('fuji_pic_small.jpg') no-repeat center center;
       background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .banner h1 {
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      margin: 0;
     }
     nav {
       text-align: center;
       background-color: #007acc;
-      padding: 0.5rem 0;
+      padding: 0.75rem 0;
     }
     nav a {
       margin: 0 15px;
       text-decoration: none;
       color: white;
       font-weight: bold;
+      font-size: 1.1rem;
     }
     main {
-      max-width: 800px;
+      max-width: 900px;
       margin: 2rem auto;
       background: white;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #about img {
+      width: 200px;
+      border-radius: 50%;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+      object-fit: cover;
     }
     footer {
       text-align: center;
@@ -56,12 +73,51 @@
 </head>
 <body>
 
-  <header>
+  <div class="banner">
     <h1>Grayson R. Davis</h1>
-  </header>
-
-  <div class="banner" style="background-image: url('fuji_pic_small.jpg');"></div>
+  </div>
 
   <nav>
     <a href="#about">About</a>
-    <a href="#projects
+    <a href="#research">Research Interests</a>
+    <a href="#notes">Notes</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <section id="about">
+      <img src="headshot.jpg" alt="Grayson R. Davis headshot">
+      <div>
+        <h2>About</h2>
+        <p>Hello! I'm Grayson R. Davis. I'm passionate about mathematics, research, and sharing knowledge. Welcome to my personal website hosted on GitHub Pages.</p>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>Research Interests</h2>
+      <p>Here I will describe my research interests, such as partial differential equations, analysis, singularity formation, and computer-assisted proofs.</p>
+    </section>
+
+    <section id="notes">
+      <h2>Notes</h2>
+      <p>I'll post some notes here from my studies, talks, or research projects. Stay tuned!</p>
+    </section>
+
+    <section id="cv">
+      <h2>CV</h2>
+      <p>You can download my CV <a href="cv.pdf" target="_blank">here</a>.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email me at: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Grayson R. Davis. All rights reserved.
+  </footer>
+
+</body>
+</html>
