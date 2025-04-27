@@ -121,11 +121,11 @@
   </div>
 
   <nav>
-    <a href="#about">About</a>
-    <a href="#research">Research Interests</a>
-    <a href="#notes">Notes</a>
-    <a href="#cv">CV</a>
-    <a href="#contact">Contact</a>
+    <a href="#" id="about-link">About</a>
+    <a href="#" id="research-link">Research Interests</a>
+    <a href="#" id="notes-link">Notes</a>
+    <a href="#" id="cv-link">CV</a>
+    <a href="#" id="contact-link">Contact</a>
   </nav>
 
   <main>
@@ -187,6 +187,34 @@
     <br>
     <em>Headshot: taken by Photos by Cheryl.</em>
   </footer>
+
+  <script>
+    // Prevent default behavior of menu links
+    document.getElementById('about-link').addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('About link clicked');
+    });
+
+    document.getElementById('research-link').addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('Research Interests link clicked');
+    });
+
+    document.getElementById('notes-link').addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('Notes link clicked');
+    });
+
+    document.getElementById('cv-link').addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('CV link clicked');
+    });
+
+    document.getElementById('contact-link').addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('Contact link clicked');
+    });
+  </script>
 
 </body>
 </html>
