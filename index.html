@@ -152,17 +152,18 @@
         display: block;
       }
 
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      margin-top: 0.5rem;
-    }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+        align-items: center; /* ✅ Add this line to center items */
+      }
 
-    .nav-links.active {
-      display: flex;
+      .nav-links.active {
+        display: flex;
+      }
     }
-  }
   </style>
 </head>
 <body>
@@ -272,6 +273,11 @@
           document.getElementById('cv').scrollIntoView({ behavior: 'smooth' });
         } else if (section === 'contact') {
           document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Collapse menu after click (on mobile)
+        if (window.innerWidth <= 600) {
+          navMenu.classList.remove('active');
         }
       });
     });
