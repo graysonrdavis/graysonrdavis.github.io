@@ -90,6 +90,21 @@
     }
 
     /* Make the layout adjust nicely on small screens */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
     @media (max-width: 768px) {
       #about {
         flex-direction: column;
@@ -158,8 +173,13 @@
     </section>
 
     <section id="cv">
-      <h2>CV</h2>
-      <p><a href="CV_apr_2025.pdf" target="_blank">CV</a> (Updated April 2025).</p>
+      <h2>Curriculum Vitae</h2>
+      <iframe 
+        src="CV_apr_2025.pdf" 
+        width="100%" 
+        height="800px" 
+        style="border: none;">
+      </iframe>
     </section>
 
     <section id="contact">
