@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grayson R. Davis</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Merriweather Sans', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: url('fuji_pic_small.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .banner h1 {
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      margin: 0;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #007acc;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 1rem;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    #about {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    #about img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    #about-text {
+      flex: 1;
+    }
+    footer {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    footer em {
+      color: #888;
+      font-style: italic;
+      font-size: 0.7rem;
+    }
+
+    /* Make the layout adjust nicely on small screens */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #about {
+        flex-direction: column;
+        text-align: center;
+      }
+      #about img {
+        margin-bottom: 1rem;
+      }
+    }
+
+    #land-acknowledgement {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    #land-acknowledgement h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+/* Responsive behavior */
+    @media (max-width: 600px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+        align-items: center; /* ✅ Add this line to center items */
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    <h1>Grayson R. Davis</h1>
+  </div>
+
+  <nav>
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="javascript:void(0)" id="about-link">About</a>
+      <a href="javascript:void(0)" id="research-link">Research Interests</a>
+      <a href="javascript:void(0)" id="notes-link">Notes</a>
+      <a href="javascript:void(0)" id="contact-link">Contact</a>
+      <a href="javascript:void(0)" id="cv-link">CV</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="about">
+      <img src="headshot.jpg" alt="Grayson R. Davis headshot">
+      <div id="about-text">
+        <h2>About</h2>
+        <p>I am a second-year PhD student at the Courant Institute of Mathematical Sciences at New York University (NYU).
+            I am originally from Coquitlam, BC, Canada, and received my BSc (Hons.) in Mathematics from Simon Fraser University (SFU) in 2024. 
+            In my free time, I like to watch anime, go for walks/hikes, and see musicals on Broadway.
+        </p>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>Research Interests</h2>
+      <p>I am broadly interested in the analysis of partial differential equations and computer-assisted 
+        proof methods in this field. My current studies have been focused on self-similar blow-up in fluid equations.
+        My undergraduate research background is in the areas of kinetic equations and numerical spectral geometry.
+      </p>
+    </section>
+
+    <section id="notes">
+      <h2>Notes</h2>
+      <p><a href="mfe1_extra_practice.pdf" target="_blank">MFE I Extra Questions</a> (NYU).</p>
+      <p><a href="nyu_grad_topology_i_notes.pdf" target="_blank">MATH-GA.2310 Topology I</a> typed notes (NYU).</p>
+      <p><a href="galois_notes.pdf" target="_blank">MATH 440 Galois Theory</a> handwritten notes (SFU).</p>
+      <p><a href="comm_alg_notes.pdf" target="_blank">MATH 441 Commutative Algebra and Algebraic Geometry</a> handwritten notes (SFU).</p>
+      <p>My honours thesis: <a href="grd_hons_thesis.pdf" target="_blank">
+          Finite Element Approximation of the Modified Steklov-Maxwell Eigenproblem</a>, 
+          advised by Professor Nilima Nigam (SFU).</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: grayson [dot] davis [at] nyu [dot] edu</p>
+      <p>Office: 608 Warren Weaver Hall</p>
+    </section>
+
+    <section id="cv">
+      <h2>Curriculum Vitae (Updated: April 2025)</h2>
+      <iframe 
+        src="CV_sep_2025.pdf" 
+        width="100%" 
+        height="800px" 
+        style="border: none;">
+      </iframe>
+    </section>
+
+    <section id="land-acknowledgement">
+      <h2>Land Acknowledgement</h2>
+      <p>
+        I respectfully acknowledge that I currently work and live in Lenapehoking, the unceded traditional land of the Lenape peoples, which settlers now call New York City.
+        It is important to recognize the ongoing and systemic violence of settler colonialism across North America and beyond.
+        I recognize that reconciliation is an active process, and I commit to reflecting on my role in it as a settler on Indigenous lands. 
+        To learn more about Land Acknowledgements and Positionality Statements, see
+        <a href="https://www.lib.sfu.ca/help/academic-integrity/indigenous-initiatives/traditional-territory">Traditional Territories: SFU's Land Acknowledgements</a> from the SFU Library.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <!-- &copy; 2025 Grayson R. Davis. All rights reserved.
+    <br> -->
+    <em>Banner: Mt. Fuji from Arakurayama Sengen Park (April 28, 2024), taken by me.</em>
+    <br>
+    <em>Headshot: taken by <a href="https://photosbycheryl.com/">Photos by Cheryl</a>.</em>
+  </footer>
+
+  <script>
+    // Select all the navigation links
+    const navLinks = document.querySelectorAll('nav a');
+  
+    // Loop through each link
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent URL change or page jump
+  
+        // Get the text content of the clicked link
+        const section = link.textContent.trim().toLowerCase(); // "about", "research", etc.
+        console.log(section + ' clicked');  // For debugging, can remove later
+  
+        // Based on the clicked link, we can perform custom actions here
+        if (section === 'about') {
+          // Example action: scroll to the About section (optional)
+          document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        } else if (section === 'research interests') {
+          document.getElementById('research').scrollIntoView({ behavior: 'smooth' });
+        } else if (section === 'notes') {
+          document.getElementById('notes').scrollIntoView({ behavior: 'smooth' });
+        } else if (section === 'cv') {
+          document.getElementById('cv').scrollIntoView({ behavior: 'smooth' });
+        } else if (section === 'contact') {
+          document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Collapse menu after click (on mobile)
+        if (window.innerWidth <= 600) {
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+  </script>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
