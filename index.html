@@ -87,7 +87,7 @@
       position: relative;
     }
 
-    /* NAV BAR UPDATES */
+    /* NAV BAR */
     nav {
       position: sticky;
       top: 0;
@@ -96,10 +96,12 @@
       padding: 0 1rem;
       display: flex;
       align-items: center;
-      /* Centers items on desktop */
+      
+      /* DESKTOP: Center the links */
       justify-content: center; 
+      
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      min-height: 60px; /* Changed from fixed height to min-height to allow expansion */
+      min-height: 60px; 
       transition: background-color 0.3s ease;
     }
 
@@ -137,9 +139,15 @@
       font-family: inherit;
       font-weight: 600;
       transition: background 0.2s;
-      /* Moved margin here to separate from links on desktop */
-      margin-left: 20px; 
+
+      /* DESKTOP: Pin to the far right */
+      position: absolute;
+      right: 1rem; 
+      /* Center vertical */
+      top: 50%;
+      transform: translateY(-50%);
     }
+    
     #theme-toggle:hover { background: rgba(255,255,255,0.2); }
 
     /* --- MAIN CONTAINER --- */
@@ -223,7 +231,7 @@
       opacity: 0.7;
     }
 
-    /* --- RESPONSIVE --- */
+    /* --- RESPONSIVE (MOBILE) --- */
     .menu-toggle { display: none; font-size: 1.5rem; background: none; border: none; color: var(--nav-text); cursor: pointer; }
 
     @media (max-width: 768px) {
@@ -234,37 +242,36 @@
     }
 
     @media (max-width: 600px) {
-      /* KEY CHANGES FOR MOBILE HEADER */
       nav { 
-        justify-content: space-between; /* Push items to edges */
-        flex-wrap: wrap; /* Allow menu to drop to next line */
+        justify-content: space-between; 
+        flex-wrap: wrap; 
         padding: 0.75rem 1rem; 
       }
 
       .menu-toggle { 
         display: block; 
-        order: 1; /* Burger First */
+        order: 1; /* Left */
       }
 
       #theme-toggle {
-        order: 2; /* Button Second (Right side) */
-        margin-left: 0; /* Remove desktop margin */
+        order: 2; /* Right */
+        /* Resetting the desktop absolute positioning so it behaves normally on mobile */
+        position: static;
+        transform: none;
+        margin-left: 0;
       }
 
       .nav-links { 
-        /* Links Dropdown Third */
-        order: 3; 
-        
+        order: 3; /* Bottom */
         display: flex; 
         flex-direction: column; 
         width: 100%; 
         
-        /* Animation States */
+        /* Animation properties */
         max-height: 0;
         opacity: 0;
         overflow: hidden; 
         margin-top: 0;
-        
         transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s;
         
         align-items: center; 
@@ -275,7 +282,7 @@
         max-height: 500px; 
         opacity: 1;
         margin-top: 1rem; 
-        padding-bottom: 1rem; /* Add some breathing room at bottom */
+        padding-bottom: 1rem;
       }
 
       nav a::after { display: none; }
@@ -297,13 +304,11 @@
       <a href="#notes">Notes</a>
       <a href="#contact">Contact</a>
       <a href="#cv">CV</a>
-      
     </div>
 
     <button id="theme-toggle">
-        🌙 Dark Mode
+      🌙 Dark Mode
     </button>
-
   </nav>
 
   <main>
@@ -395,7 +400,6 @@
   </footer>
 
   <script>
-    // 1. Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-links');
 
@@ -403,29 +407,22 @@
       navMenu.classList.toggle('active');
     });
 
-    // 2. Smooth Scroll without History "Jumps"
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', function(e) {
-        // Prevent the default behavior (which adds #section to URL)
         e.preventDefault();
-
-        // Get the target section id (e.g., "about")
         const targetId = this.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
 
         if (targetSection) {
-          // Scroll smoothly to the section
           targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Close menu if on mobile
         if (window.innerWidth <= 600) {
           navMenu.classList.remove('active');
         }
       });
     });
 
-    // 3. Theme Toggle Logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     
     themeToggleBtn.addEventListener('click', () => {
