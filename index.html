@@ -247,32 +247,37 @@
 
     @media (max-width: 600px) {
       nav { 
-        justify-content: space-between; 
+        /* FIXED: This centers the hamburger icon (☰) on the screen */
+        justify-content: center; 
         height: auto; 
         padding: 0.75rem 1rem; 
       }
+
       .menu-toggle { 
-        display: block; 
+        display: block;
+        /* FIXED: Ensures the button doesn't stick to the side */
+        margin: 0 auto; 
       }
+
       .nav-links { 
         display: none; 
         flex-direction: column; 
         width: 100%; 
         margin-top: 1rem; 
-        
-        /* FIXED: Centering logic */
         align-items: center; 
         justify-content: center;
         text-align: center;
-        
-        gap: 1.5rem; /* A bit more space between mobile links */
+        gap: 1.5rem; 
       }
+
       .nav-links.active { 
         display: flex; 
       }
+
       nav a::after { 
         display: none; 
       }
+
       #theme-toggle { 
         margin-left: 0; 
         margin-top: 10px; 
