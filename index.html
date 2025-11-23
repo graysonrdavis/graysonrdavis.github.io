@@ -14,18 +14,16 @@
       --bg-color: #eef2f5;
       --text-color: #333;
       --card-bg: #ffffff;
-      
-      /* 1. FIXED: Brighter Blue Colors */
       --nav-bg: #007acc;       
       --nav-text: #ffffff;
       --accent-color: #007acc; 
-      --link-hover: #40a9ff;   /* Lighter blue for hover */
-      
+      --link-hover: #40a9ff;
       --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
       --border-color: #eee;
 
-      /* 2. FIXED: Smart Dimming Variable (Light Mode = only 10% dim) */
-      --banner-overlay: 0.1; 
+      /* NEW: We define the overlay color itself, not just the number */
+      /* Light mode: very subtle dim */
+      --banner-overlay-color: rgba(0,0,0,0.1); 
     }
 
     body.dark-mode {
@@ -39,8 +37,8 @@
       --shadow: 0 4px 6px rgba(0,0,0,0.3);
       --border-color: #333;
 
-      /* Dark Mode = 50% dim so text pops */
-      --banner-overlay: 0.5; 
+      /* Dark mode: deeper dim for readability */
+      --banner-overlay-color: rgba(0,0,0,0.6); 
     }
 
     /* --- GLOBAL RESET & TYPOGRAPHY --- */
@@ -51,7 +49,8 @@
       margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
+      /* This handles the smooth transition for most of the page */
+      transition: background-color 0.3s ease, color 0.3s ease;
       line-height: 1.6;
     }
 
@@ -59,19 +58,38 @@
     a:hover { color: var(--link-hover); text-decoration: underline; }
 
     /* --- LAYOUT --- */
+    
+    /* 1. The Banner Container */
     .banner {
       position: relative;
       width: 100%;
       height: 280px;
-      /* 3. FIXED: Uses the variable to change dimness based on mode */
-      background: linear-gradient(rgba(0,0,0,var(--banner-overlay)), rgba(0,0,0,var(--banner-overlay))), url('fuji_pic_small.jpg') no-repeat center center;
+      /* Just the raw image now - no gradient here */
+      background: url('fuji_pic_small.jpg') no-repeat center center;
       background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      transition: background 0.3s; /* Smooth transition for the dimming */
+      /* We don't transition the banner background anymore */
     }
+
+    /* 2. The Smooth Overlay Magic */
+    .banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* This uses the variable color defined at the top */
+      background-color: var(--banner-overlay-color);
+      /* This is what makes the dimming smooth! */
+      transition: background-color 0.3s ease;
+      z-index: 1; /* Sit on top of the image */
+    }
+
+    /* 3. The Text */
     .banner h1 {
       color: white;
       font-size: 3.5rem;
@@ -79,6 +97,9 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       margin: 0;
       letter-spacing: 1px;
+      /* Ensure text sits ON TOP of the dark overlay */
+      z-index: 2;
+      position: relative;
     }
 
     nav {
@@ -92,7 +113,7 @@
       justify-content: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       height: 60px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
 
     .nav-links { display: flex; gap: 2rem; align-items: center; height: 100%; }
@@ -136,7 +157,6 @@
     /* --- MAIN CONTAINER --- */
     main {
       max-width: 900px;
-      /* 4. FIXED: Removed negative margin so it doesn't slide under the nav */
       margin: 2rem auto; 
       position: relative;
       padding: 0 1rem;
@@ -149,8 +169,8 @@
       margin-bottom: 2rem;
       box-shadow: var(--shadow);
       border: 1px solid var(--border-color);
-      /* Ensures content stays inside the rounded corners */
       overflow: hidden; 
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     h2 {
@@ -160,18 +180,20 @@
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--border-color);
       color: var(--text-color);
+      transition: border-color 0.3s ease, color 0.3s ease;
     }
 
     .note-item {
       margin-bottom: 1rem;
       padding-left: 1rem;
       border-left: 3px solid var(--accent-color);
+      transition: border-color 0.3s ease;
     }
 
     #about {
       display: flex;
       gap: 2.5rem;
-      align-items: start; /* Aligns image and text at the top */
+      align-items: start; 
     }
     
     #about img {
@@ -180,7 +202,6 @@
       object-fit: cover;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      /* Ensures image doesn't shrink on small screens */
       flex-shrink: 0; 
     }
 
@@ -192,7 +213,7 @@
       border-radius: 5px;
       margin-bottom: 15px;
       font-weight: normal;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     .btn-download:hover {
       background-color: var(--link-hover);
