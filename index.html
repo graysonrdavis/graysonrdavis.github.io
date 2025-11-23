@@ -20,9 +20,6 @@
       --link-hover: #40a9ff;
       --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
       --border-color: #eee;
-
-      /* NEW: We define the overlay color itself, not just the number */
-      /* Light mode: very subtle dim */
       --banner-overlay-color: rgba(0,0,0,0.1); 
     }
 
@@ -36,8 +33,6 @@
       --link-hover: #93c5fd;
       --shadow: 0 4px 6px rgba(0,0,0,0.3);
       --border-color: #333;
-
-      /* Dark mode: deeper dim for readability */
       --banner-overlay-color: rgba(0,0,0,0.6); 
     }
 
@@ -49,7 +44,6 @@
       margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      /* This handles the smooth transition for most of the page */
       transition: background-color 0.3s ease, color 0.3s ease;
       line-height: 1.6;
     }
@@ -58,23 +52,18 @@
     a:hover { color: var(--link-hover); text-decoration: underline; }
 
     /* --- LAYOUT --- */
-    
-    /* 1. The Banner Container */
     .banner {
       position: relative;
       width: 100%;
       height: 280px;
-      /* Just the raw image now - no gradient here */
       background: url('fuji_pic_small.jpg') no-repeat center center;
       background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      /* We don't transition the banner background anymore */
     }
 
-    /* 2. The Smooth Overlay Magic */
     .banner::after {
       content: '';
       position: absolute;
@@ -82,14 +71,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* This uses the variable color defined at the top */
       background-color: var(--banner-overlay-color);
-      /* This is what makes the dimming smooth! */
       transition: background-color 0.3s ease;
-      z-index: 1; /* Sit on top of the image */
+      z-index: 1;
     }
 
-    /* 3. The Text */
     .banner h1 {
       color: white;
       font-size: 3.5rem;
@@ -97,11 +83,11 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       margin: 0;
       letter-spacing: 1px;
-      /* Ensure text sits ON TOP of the dark overlay */
       z-index: 2;
       position: relative;
     }
 
+    /* NAV BAR UPDATES */
     nav {
       position: sticky;
       top: 0;
@@ -110,13 +96,14 @@
       padding: 0 1rem;
       display: flex;
       align-items: center;
-      justify-content: center;
+      /* Centers items on desktop */
+      justify-content: center; 
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      height: 60px;
+      min-height: 60px; /* Changed from fixed height to min-height to allow expansion */
       transition: background-color 0.3s ease;
     }
 
-    .nav-links { display: flex; gap: 2rem; align-items: center; height: 100%; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
     
     nav a {
       color: var(--nav-text);
@@ -150,7 +137,8 @@
       font-family: inherit;
       font-weight: 600;
       transition: background 0.2s;
-      margin-left: 20px;
+      /* Moved margin here to separate from links on desktop */
+      margin-left: 20px; 
     }
     #theme-toggle:hover { background: rgba(255,255,255,0.2); }
 
@@ -246,54 +234,51 @@
     }
 
     @media (max-width: 600px) {
-      /* 1. Keep the layout side-by-side (Hamburger Left/Right) */
+      /* KEY CHANGES FOR MOBILE HEADER */
       nav { 
-        justify-content: space-between; 
-        height: auto; 
+        justify-content: space-between; /* Push items to edges */
+        flex-wrap: wrap; /* Allow menu to drop to next line */
         padding: 0.75rem 1rem; 
       }
 
       .menu-toggle { 
         display: block; 
-        /* Removed 'margin: 0 auto' so it stays on the side */
+        order: 1; /* Burger First */
       }
 
-      /* 2. The Animation Logic */
+      #theme-toggle {
+        order: 2; /* Button Second (Right side) */
+        margin-left: 0; /* Remove desktop margin */
+      }
+
       .nav-links { 
-        /* We must use flex even when hidden to keep structure ready */
+        /* Links Dropdown Third */
+        order: 3; 
+        
         display: flex; 
         flex-direction: column; 
         width: 100%; 
         
-        /* HIDDEN STATE: Height is 0, invisible */
+        /* Animation States */
         max-height: 0;
         opacity: 0;
-        overflow: hidden; /* Ensures content doesn't spill out when height is 0 */
+        overflow: hidden; 
         margin-top: 0;
         
-        /* This creates the smooth slide and fade */
         transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s;
         
         align-items: center; 
         gap: 1.5rem; 
       }
 
-      /* 3. The OPEN STATE */
       .nav-links.active { 
-        /* Large enough number to fit all links, but not infinity */
         max-height: 500px; 
         opacity: 1;
-        margin-top: 1rem; /* Add space only when open */
+        margin-top: 1rem; 
+        padding-bottom: 1rem; /* Add some breathing room at bottom */
       }
 
-      nav a::after { 
-        display: none; 
-      }
-
-      #theme-toggle { 
-        margin-left: 0; 
-        margin-top: 10px; 
-      }
+      nav a::after { display: none; }
     }
   </style>
 </head>
@@ -313,10 +298,12 @@
       <a href="#contact">Contact</a>
       <a href="#cv">CV</a>
       
-      <button id="theme-toggle">
-        🌙 Dark Mode
-      </button>
     </div>
+
+    <button id="theme-toggle">
+        🌙 Dark Mode
+    </button>
+
   </nav>
 
   <main>
