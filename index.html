@@ -246,33 +246,50 @@
     }
 
     @media (max-width: 600px) {
+      /* 1. Keep the layout side-by-side (Hamburger Left/Right) */
       nav { 
         justify-content: space-between; 
         height: auto; 
         padding: 0.75rem 1rem; 
       }
+
       .menu-toggle { 
         display: block; 
+        /* Removed 'margin: 0 auto' so it stays on the side */
       }
+
+      /* 2. The Animation Logic */
       .nav-links { 
-        display: none; 
+        /* We must use flex even when hidden to keep structure ready */
+        display: flex; 
         flex-direction: column; 
         width: 100%; 
-        margin-top: 1rem; 
         
-        /* FIXED: Centering logic */
+        /* HIDDEN STATE: Height is 0, invisible */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden; /* Ensures content doesn't spill out when height is 0 */
+        margin-top: 0;
+        
+        /* This creates the smooth slide and fade */
+        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s;
+        
         align-items: center; 
-        justify-content: center;
-        text-align: center;
-        
-        gap: 1.5rem; /* A bit more space between mobile links */
+        gap: 1.5rem; 
       }
+
+      /* 3. The OPEN STATE */
       .nav-links.active { 
-        display: flex; 
+        /* Large enough number to fit all links, but not infinity */
+        max-height: 500px; 
+        opacity: 1;
+        margin-top: 1rem; /* Add space only when open */
       }
+
       nav a::after { 
         display: none; 
       }
+
       #theme-toggle { 
         margin-left: 0; 
         margin-top: 10px; 
