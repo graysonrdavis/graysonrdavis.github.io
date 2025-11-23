@@ -8,6 +8,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      /* Default (Light) Theme Variables */
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --card-bg: white;
+      --nav-bg: #007acc;
+      --nav-text: white;
+      --link-color: #007acc;
+      --shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* Dark Theme Variables */
+    .dark-mode {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --card-bg: #1e1e1e;
+      --nav-bg: #1f2937;
+      --nav-text: #e0e0e0;
+      --link-color: #60a5fa;
+      --shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    /* Apply variables to elements */
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+    }
+
+    nav a, .menu-toggle {
+      color: var(--nav-text);
+    }
+
+    main {
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow);
+    }
+
+    a {
+      color: var(--link-color);
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -181,6 +227,11 @@
       <a href="javascript:void(0)" id="contact-link">Contact</a>
       <a href="javascript:void(0)" id="cv-link">CV</a>
     </div>
+
+    <button id="theme-toggle" style="background:none; border:1px solid var(--nav-text); color:var(--nav-text); padding: 5px 10px; cursor: pointer; border-radius: 5px; font-size: 0.9rem;">
+  🌙 Theme
+    </button>
+
   </nav>
 
   <main>
@@ -292,6 +343,21 @@
 
     menuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
+    });
+  </script>
+
+  <script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      
+      // Update button text based on mode
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = "☀️ Light Mode";
+      } else {
+        themeToggleBtn.textContent = "🌙 Dark Mode";
+      }
     });
   </script>
 
