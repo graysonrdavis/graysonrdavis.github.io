@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Academic website of Grayson R. Davis, PhD student at NYU Courant Institute.">
   <title>Grayson R. Davis</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    /* 1. THEME VARIABLES */
     :root {
-      /* Default (Light) Theme Variables */
+      /* Default (Light) Theme */
       --bg-color: #f4f4f4;
       --text-color: #333;
       --card-bg: white;
@@ -17,10 +19,11 @@
       --nav-text: white;
       --link-color: #007acc;
       --shadow: 0 0 10px rgba(0,0,0,0.1);
+      --border-color: #ddd;
     }
 
-    /* Dark Theme Variables */
-    .dark-mode {
+    /* Dark Theme Overrides */
+    body.dark-mode {
       --bg-color: #121212;
       --text-color: #e0e0e0;
       --card-bg: #1e1e1e;
@@ -28,32 +31,10 @@
       --nav-text: #e0e0e0;
       --link-color: #60a5fa;
       --shadow: 0 0 10px rgba(0,0,0,0.5);
+      --border-color: #444;
     }
 
-    /* Apply variables to elements */
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-    }
-
-    nav {
-      background-color: var(--nav-bg);
-    }
-
-    nav a, .menu-toggle {
-      color: var(--nav-text);
-    }
-
-    main {
-      background-color: var(--card-bg);
-      box-shadow: var(--shadow);
-    }
-
-    a {
-      color: var(--link-color);
-    }
-
+    /* 2. GLOBAL STYLES */
     html {
       scroll-behavior: smooth;
     }
@@ -61,9 +42,20 @@
     body {
       font-family: 'Merriweather Sans', sans-serif;
       margin: 0;
-      background-color: #f4f4f4;
-      color: #333;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 3. LAYOUT COMPONENTS */
     .banner {
       position: relative;
       width: 100%;
@@ -81,11 +73,12 @@
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
       margin: 0;
     }
+
     nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background-color: #007acc;
+      background-color: var(--nav-bg);
       padding: 0.75rem 1rem;
       display: flex;
       flex-wrap: wrap;
@@ -93,25 +86,66 @@
       justify-content: center;
       gap: 1rem;
       font-size: 1rem;
+      transition: background-color 0.3s;
     }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
     nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: white;
+      margin: 0 10px;
+      color: var(--nav-text);
       font-weight: bold;
       font-size: 1.1rem;
     }
+    
+    nav a:hover {
+        text-decoration: none;
+        opacity: 0.8;
+    }
+
+    /* Theme Toggle Button Styling */
+    #theme-toggle {
+      background: none;
+      border: 1px solid var(--nav-text);
+      color: var(--nav-text);
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1rem; /* Match link size */
+      font-family: inherit; /* Crucial: Inherit the Merriweather font */
+      font-weight: 600;
+      margin-left: 15px;
+    }
+    
+    #theme-toggle:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
     main {
       max-width: 1000px;
       margin: 2rem auto;
-      background: white;
+      background-color: var(--card-bg);
       padding: 2rem;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s, box-shadow 0.3s;
     }
+
     section {
       margin-bottom: 3rem;
+      scroll-margin-top: 80px; /* Prevents nav from covering headers on scroll */
     }
+
+    p {
+        line-height: 1.6;
+        max-width: 75ch; /* Improves readability on wide screens */
+    }
+
+    /* 4. SPECIFIC SECTIONS */
     #about {
       display: flex;
       align-items: center;
@@ -127,33 +161,36 @@
     #about-text {
       flex: 1;
     }
+
+    #land-acknowledgement {
+      background-color: var(--bg-color); /* Slightly distinct from card bg */
+      padding: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      border-radius: 8px;
+    }
+    #land-acknowledgement h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
     footer {
       text-align: center;
       margin: 2rem 0;
       font-size: 0.9em;
-      color: #777;
+      color: var(--text-color);
+      opacity: 0.8;
     }
 
-    footer em {
-      color: #888;
-      font-style: italic;
-      font-size: 0.7rem;
-    }
-
-    /* Make the layout adjust nicely on small screens */
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      font-size: 1rem;
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
+    /* 5. RESPONSIVE */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      cursor: pointer;
     }
 
     @media (max-width: 768px) {
@@ -166,48 +203,29 @@
       }
     }
 
-    #land-acknowledgement {
-      background-color: #f9f9f9;
-      padding: 2rem;
-      margin-top: 3rem;
-      border-top: 1px solid #ddd;
-      font-size: 0.95rem;
-      color: #555;
-    }
-    #land-acknowledgement h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-/* Responsive behavior */
     @media (max-width: 600px) {
+      nav {
+        justify-content: space-between;
+      }
       .menu-toggle {
         display: block;
       }
-
       .nav-links {
         display: none;
         flex-direction: column;
         width: 100%;
-        margin-top: 0.5rem;
-        align-items: center; /* ✅ Add this line to center items */
+        margin-top: 1rem;
+        align-items: center;
       }
-
       .nav-links.active {
         display: flex;
+      }
+      nav a {
+          margin: 10px 0;
+      }
+      #theme-toggle {
+          margin-left: 0;
+          margin-top: 10px;
       }
     }
   </style>
@@ -220,18 +238,18 @@
 
   <nav>
     <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    
     <div class="nav-links">
-      <a href="javascript:void(0)" id="about-link">About</a>
-      <a href="javascript:void(0)" id="research-link">Research Interests</a>
-      <a href="javascript:void(0)" id="notes-link">Notes</a>
-      <a href="javascript:void(0)" id="contact-link">Contact</a>
-      <a href="javascript:void(0)" id="cv-link">CV</a>
+      <a href="#about">About</a>
+      <a href="#research">Research Interests</a>
+      <a href="#notes">Notes</a>
+      <a href="#contact">Contact</a>
+      <a href="#cv">CV</a>
+      
+      <button id="theme-toggle">
+        🌙 Dark Mode
+      </button>
     </div>
-
-    <button id="theme-toggle" style="background:none; border:1px solid var(--nav-text); color:var(--nav-text); padding: 5px 10px; cursor: pointer; border-radius: 5px; font-size: 0.9rem;">
-  🌙 Theme
-    </button>
-
   </nav>
 
   <main>
@@ -256,12 +274,12 @@
 
     <section id="notes">
       <h2>Notes</h2>
-      <p><a href="MFE_I_Extra_Practice_nov20.pdf" target="_blank">MATH-UA 131 MFE I Extra Questions</a> - Updated Nov. 20, 2025 (NYU).</p>
-      <p><a href="nyu_math_society_talk.pdf" target="_blank">NYU Math Society Academic Talk Oct 1., 2025</a> handwritten notes (NYU).</p>
-      <p><a href="nyu_grad_topology_i_notes.pdf" target="_blank">MATH-GA 2310 Topology I</a> typed notes (NYU).</p>
-      <p><a href="galois_notes.pdf" target="_blank">MATH 440 Galois Theory</a> handwritten notes (SFU).</p>
-      <p><a href="comm_alg_notes.pdf" target="_blank">MATH 441 Commutative Algebra and Algebraic Geometry</a> handwritten notes (SFU).</p>
-      <p>My honours thesis: <a href="grd_hons_thesis.pdf" target="_blank">
+      <p><a href="MFE_I_Extra_Practice_nov20.pdf" target="_blank" rel="noopener noreferrer">MATH-UA 131 MFE I Extra Questions</a> - Updated Nov. 20, 2025 (NYU).</p>
+      <p><a href="nyu_math_society_talk.pdf" target="_blank" rel="noopener noreferrer">NYU Math Society Academic Talk Oct 1., 2025</a> handwritten notes (NYU).</p>
+      <p><a href="nyu_grad_topology_i_notes.pdf" target="_blank" rel="noopener noreferrer">MATH-GA 2310 Topology I</a> typed notes (NYU).</p>
+      <p><a href="galois_notes.pdf" target="_blank" rel="noopener noreferrer">MATH 440 Galois Theory</a> handwritten notes (SFU).</p>
+      <p><a href="comm_alg_notes.pdf" target="_blank" rel="noopener noreferrer">MATH 441 Commutative Algebra and Algebraic Geometry</a> handwritten notes (SFU).</p>
+      <p>My honours thesis: <a href="grd_hons_thesis.pdf" target="_blank" rel="noopener noreferrer">
           Finite Element Approximation of the Modified Steklov-Maxwell Eigenproblem</a>, 
           advised by Professor Nilima Nigam (SFU).</p>
     </section>
@@ -274,6 +292,9 @@
 
     <section id="cv">
       <h2>Curriculum Vitae (Updated: September 2025)</h2>
+      <p>
+          <a href="CV_sep_2025.pdf" target="_blank" rel="noopener noreferrer">Download CV (PDF)</a>
+      </p>
       <iframe 
         src="CV_sep_2025.pdf" 
         width="100%" 
@@ -289,70 +310,41 @@
         It is important to recognize the ongoing and systemic violence of settler colonialism across North America and beyond.
         I recognize that reconciliation is an active process, and I commit to reflecting on my role in it as a settler on Indigenous lands. 
         To learn more about Land Acknowledgements and Positionality Statements, see
-        <a href="https://www.lib.sfu.ca/help/academic-integrity/indigenous-initiatives/traditional-territory">Traditional Territories: SFU's Land Acknowledgements</a> from the SFU Library.
+        <a href="https://www.lib.sfu.ca/help/academic-integrity/indigenous-initiatives/traditional-territory" target="_blank" rel="noopener noreferrer">Traditional Territories: SFU's Land Acknowledgements</a> from the SFU Library.
       </p>
     </section>
   </main>
 
   <footer>
-    <!-- &copy; 2025 Grayson R. Davis. All rights reserved.
-    <br> -->
     <em>Banner: Mt. Fuji from Arakurayama Sengen Park (April 28, 2024), taken by me.</em>
     <br>
-    <em>Headshot: taken by <a href="https://photosbycheryl.com/">Photos by Cheryl</a>.</em>
+    <em>Headshot: taken by <a href="https://photosbycheryl.com/" target="_blank" rel="noopener noreferrer">Photos by Cheryl</a>.</em>
   </footer>
 
   <script>
-    // Select all the navigation links
-    const navLinks = document.querySelectorAll('nav a');
-  
-    // Loop through each link
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent URL change or page jump
-  
-        // Get the text content of the clicked link
-        const section = link.textContent.trim().toLowerCase(); // "about", "research", etc.
-        console.log(section + ' clicked');  // For debugging, can remove later
-  
-        // Based on the clicked link, we can perform custom actions here
-        if (section === 'about') {
-          // Example action: scroll to the About section (optional)
-          document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-        } else if (section === 'research interests') {
-          document.getElementById('research').scrollIntoView({ behavior: 'smooth' });
-        } else if (section === 'notes') {
-          document.getElementById('notes').scrollIntoView({ behavior: 'smooth' });
-        } else if (section === 'cv') {
-          document.getElementById('cv').scrollIntoView({ behavior: 'smooth' });
-        } else if (section === 'contact') {
-          document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Collapse menu after click (on mobile)
-        if (window.innerWidth <= 600) {
-          navMenu.classList.remove('active');
-        }
-      });
-    });
-  </script>
-
-  <script>
+    // 1. Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-links');
 
     menuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
-  </script>
 
-  <script>
+    // Close menu when a link is clicked (for mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 600) {
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+
+    // 2. Theme Toggle Logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     
     themeToggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       
-      // Update button text based on mode
       if (document.body.classList.contains('dark-mode')) {
         themeToggleBtn.textContent = "☀️ Light Mode";
       } else {
