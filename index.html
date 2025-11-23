@@ -246,12 +246,37 @@
     }
 
     @media (max-width: 600px) {
-      nav { justify-content: space-between; height: auto; padding: 0.75rem 1rem; }
-      .menu-toggle { display: block; }
-      .nav-links { display: none; flex-direction: column; width: 100%; margin-top: 1rem; align-items: center; gap: 1rem; }
-      .nav-links.active { display: flex; }
-      nav a::after { display: none; }
-      #theme-toggle { margin-left: 0; margin-top: 10px; }
+      nav { 
+        justify-content: space-between; 
+        height: auto; 
+        padding: 0.75rem 1rem; 
+      }
+      .menu-toggle { 
+        display: block; 
+      }
+      .nav-links { 
+        display: none; 
+        flex-direction: column; 
+        width: 100%; 
+        margin-top: 1rem; 
+        
+        /* FIXED: Centering logic */
+        align-items: center; 
+        justify-content: center;
+        text-align: center;
+        
+        gap: 1.5rem; /* A bit more space between mobile links */
+      }
+      .nav-links.active { 
+        display: flex; 
+      }
+      nav a::after { 
+        display: none; 
+      }
+      #theme-toggle { 
+        margin-left: 0; 
+        margin-top: 10px; 
+      }
     }
   </style>
 </head>
@@ -366,7 +391,7 @@
   </footer>
 
   <script>
-    // Mobile Menu Toggle
+    // 1. Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-links');
 
@@ -374,16 +399,29 @@
       navMenu.classList.toggle('active');
     });
 
-    // Close menu when a link is clicked
+    // 2. Smooth Scroll without History "Jumps"
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 600) {
-                navMenu.classList.remove('active');
-            }
-        });
+      link.addEventListener('click', function(e) {
+        // Prevent the default behavior (which adds #section to URL)
+        e.preventDefault();
+
+        // Get the target section id (e.g., "about")
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+
+        if (targetSection) {
+          // Scroll smoothly to the section
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Close menu if on mobile
+        if (window.innerWidth <= 600) {
+          navMenu.classList.remove('active');
+        }
+      });
     });
 
-    // Theme Toggle Logic
+    // 3. Theme Toggle Logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     
     themeToggleBtn.addEventListener('click', () => {
