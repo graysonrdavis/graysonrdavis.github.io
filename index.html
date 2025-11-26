@@ -24,7 +24,9 @@
       --link-hover: #40a9ff;
       --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
       --border-color: #eee;
-      --banner-overlay-color: rgba(0,0,0,0.1); 
+      
+      /* FIXED: Set to 0.0 (fully transparent) so the photo is bright */
+      --banner-overlay-color: rgba(0,0,0,0); 
     }
 
     body.dark-mode {
@@ -139,7 +141,6 @@
       font-size: 1rem;
       padding: 0.5rem 0;
       position: relative;
-      /* FIXED: Smooth color transition for links */
       transition: color 0.8s ease;
     }
     
@@ -166,10 +167,7 @@
       font-size: 0.85rem;
       font-family: inherit;
       font-weight: 600;
-      
-      /* FIXED: Background handles hover (fast), Color/Border handles theme (slow) */
       transition: background 0.2s, color 0.8s ease, border-color 0.8s ease;
-      
       position: absolute;
       right: 1rem; 
       top: 50%;
@@ -426,6 +424,7 @@
   </footer>
 
   <script>
+    // 1. Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-links');
 
@@ -433,6 +432,7 @@
       navMenu.classList.toggle('active');
     });
 
+    // 2. Smooth Scroll Logic
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -449,15 +449,27 @@
       });
     });
 
+    // 3. Theme Toggle with Local Storage
     const themeToggleBtn = document.getElementById('theme-toggle');
     
+    // Check saved preference on load
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeToggleBtn.textContent = "☀️ Light Mode";
+    }
+
     themeToggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       
+      // Save preference
       if (document.body.classList.contains('dark-mode')) {
         themeToggleBtn.textContent = "☀️ Light Mode";
+        localStorage.setItem('theme', 'dark');
       } else {
         themeToggleBtn.textContent = "🌙 Dark Mode";
+        localStorage.setItem('theme', 'light');
       }
     });
   </script>
