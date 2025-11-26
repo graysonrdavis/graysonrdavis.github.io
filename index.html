@@ -13,7 +13,7 @@
     :root {
       /* 1. IMAGE CONFIGURATION */
       --banner-light: url('fuji_pic_small.jpg'); 
-      --banner-dark: url('fuji_night.jpg'); /* If you don't have this file, it will just be dark grey */
+      --banner-dark: url('shibuya_scramble2.jpg'); 
 
       --bg-color: #eef2f5;
       --text-color: #333;
@@ -48,7 +48,7 @@
       margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      /* Slowed down to 0.8s for a smoother feel */
+      /* UPDATED: 0.8s for main background/text fade */
       transition: background-color 0.8s ease, color 0.8s ease;
       line-height: 1.6;
     }
@@ -83,8 +83,8 @@
       background: var(--banner-dark) no-repeat center center;
       background-size: cover;
       opacity: 0; 
-      /* Slowed down to 1.5s for a cinematic fade */
-      transition: opacity 1.5s ease-in-out; 
+      /* UPDATED: 0.8s for image cross-fade */
+      transition: opacity 0.8s ease-in-out; 
       z-index: 0; 
     }
 
@@ -102,8 +102,8 @@
       width: 100%;
       height: 100%;
       background-color: var(--banner-overlay-color);
-      /* Slowed down to 1.5s to match the image fade */
-      transition: background-color 1.5s ease;
+      /* UPDATED: 0.8s for overlay darkening */
+      transition: background-color 0.8s ease;
       z-index: 1; 
     }
 
@@ -115,7 +115,7 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       margin: 0;
       letter-spacing: 1px;
-      z-index: 2; 
+      z-index: 2;
       position: relative;
     }
 
@@ -131,7 +131,7 @@
       justify-content: center; 
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       min-height: 60px; 
-      /* Slowed down to 0.8s */
+      /* UPDATED: 0.8s for nav bar color change */
       transition: background-color 0.8s ease;
     }
 
@@ -193,7 +193,7 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border-color);
       overflow: hidden; 
-      /* Slowed down to 0.8s */
+      /* UPDATED: 0.8s for card background/border/shadow */
       transition: background-color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
     }
 
@@ -204,7 +204,7 @@
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--border-color);
       color: var(--text-color);
-      /* Slowed down to 0.8s */
+      /* UPDATED: 0.8s for headers */
       transition: border-color 0.8s ease, color 0.8s ease;
     }
 
@@ -212,7 +212,7 @@
       margin-bottom: 1rem;
       padding-left: 1rem;
       border-left: 3px solid var(--accent-color);
-      /* Slowed down to 0.8s */
+      /* UPDATED: 0.8s for the note sidebar color */
       transition: border-color 0.8s ease;
     }
 
@@ -420,7 +420,9 @@
   </main>
 
   <footer>
-    <em>Banner: Mt. Fuji from Arakurayama Sengen Park (April 28, 2024), taken by me.</em>
+    <em>Light Banner: Mt. Fuji from Arakurayama Sengen Park (April 28, 2024), taken by me.</em>
+    <br>
+    <em>Dark Banner: Shibuya scramble crossing from Shibuya Sky (May 17, 2024), taken by me.</em>
     <br>
     <em>Headshot: taken by <a href="https://photosbycheryl.com/" target="_blank" rel="noopener noreferrer">Photos by Cheryl</a>.</em>
   </footer>
