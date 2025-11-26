@@ -48,7 +48,6 @@
       margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      /* UPDATED: 0.8s for main background/text fade */
       transition: background-color 0.8s ease, color 0.8s ease;
       line-height: 1.6;
     }
@@ -83,7 +82,6 @@
       background: var(--banner-dark) no-repeat center center;
       background-size: cover;
       opacity: 0; 
-      /* UPDATED: 0.8s for image cross-fade */
       transition: opacity 0.8s ease-in-out; 
       z-index: 0; 
     }
@@ -102,7 +100,6 @@
       width: 100%;
       height: 100%;
       background-color: var(--banner-overlay-color);
-      /* UPDATED: 0.8s for overlay darkening */
       transition: background-color 0.8s ease;
       z-index: 1; 
     }
@@ -131,7 +128,6 @@
       justify-content: center; 
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       min-height: 60px; 
-      /* UPDATED: 0.8s for nav bar color change */
       transition: background-color 0.8s ease;
     }
 
@@ -143,6 +139,8 @@
       font-size: 1rem;
       padding: 0.5rem 0;
       position: relative;
+      /* FIXED: Smooth color transition for links */
+      transition: color 0.8s ease;
     }
     
     nav a::after {
@@ -168,7 +166,10 @@
       font-size: 0.85rem;
       font-family: inherit;
       font-weight: 600;
-      transition: background 0.2s;
+      
+      /* FIXED: Background handles hover (fast), Color/Border handles theme (slow) */
+      transition: background 0.2s, color 0.8s ease, border-color 0.8s ease;
+      
       position: absolute;
       right: 1rem; 
       top: 50%;
@@ -193,7 +194,6 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border-color);
       overflow: hidden; 
-      /* UPDATED: 0.8s for card background/border/shadow */
       transition: background-color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
     }
 
@@ -204,7 +204,6 @@
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--border-color);
       color: var(--text-color);
-      /* UPDATED: 0.8s for headers */
       transition: border-color 0.8s ease, color 0.8s ease;
     }
 
@@ -212,7 +211,6 @@
       margin-bottom: 1rem;
       padding-left: 1rem;
       border-left: 3px solid var(--accent-color);
-      /* UPDATED: 0.8s for the note sidebar color */
       transition: border-color 0.8s ease;
     }
 
