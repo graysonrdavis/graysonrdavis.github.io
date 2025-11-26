@@ -11,6 +11,11 @@
   <style>
     /* --- THEME VARIABLES --- */
     :root {
+      /* 1. IMAGE CONFIGURATION */
+      /* Make sure you have these two files in your folder! */
+      --banner-light: url('fuji_pic_small.jpg'); 
+      --banner-dark: url('shibuya_scramble.jpg'); /* <--- CHANGE THIS to your night photo filename */
+
       --bg-color: #eef2f5;
       --text-color: #333;
       --card-bg: #ffffff;
@@ -33,7 +38,7 @@
       --link-hover: #93c5fd;
       --shadow: 0 4px 6px rgba(0,0,0,0.3);
       --border-color: #333;
-      --banner-overlay-color: rgba(0,0,0,0.6); 
+      --banner-overlay-color: rgba(0,0,0,0.5); 
     }
 
     /* --- GLOBAL RESET & TYPOGRAPHY --- */
@@ -44,7 +49,7 @@
       margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.4s ease, color 0.4s ease;
       line-height: 1.6;
     }
 
@@ -52,18 +57,46 @@
     a:hover { color: var(--link-hover); text-decoration: underline; }
 
     /* --- LAYOUT --- */
+    
+    /* 1. BANNER (Layer 1: The Day Image) */
     .banner {
       position: relative;
       width: 100%;
       height: 280px;
-      background: url('fuji_pic_small.jpg') no-repeat center center;
+      /* Uses the variable for the Light Image */
+      background: var(--banner-light) no-repeat center center;
       background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      z-index: 0;
     }
 
+    /* 2. BANNER NIGHT LAYER (Layer 2: The Night Image) */
+    /* This sits on top of the day image but is invisible (opacity 0) by default */
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--banner-dark) no-repeat center center;
+      background-size: cover;
+      opacity: 0; /* Hidden initially */
+      transition: opacity 0.5s ease-in-out; /* Smooth cross-fade */
+      z-index: 0; 
+    }
+
+    /* 3. DARK MODE TRIGGER */
+    /* When dark mode is active, make the night layer visible */
+    body.dark-mode .banner::before {
+      opacity: 1;
+    }
+
+    /* 4. OVERLAY (Layer 3: The Dimming Color) */
+    /* This sits on top of both images to darken them for text readability */
     .banner::after {
       content: '';
       position: absolute;
@@ -72,10 +105,11 @@
       width: 100%;
       height: 100%;
       background-color: var(--banner-overlay-color);
-      transition: background-color 0.3s ease;
-      z-index: 1;
+      transition: background-color 0.5s ease;
+      z-index: 1; 
     }
 
+    /* 5. TEXT (Layer 4: The Title) */
     .banner h1 {
       color: white;
       font-size: 3.5rem;
@@ -83,7 +117,7 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       margin: 0;
       letter-spacing: 1px;
-      z-index: 2;
+      z-index: 2; /* Must be highest to sit on top of everything */
       position: relative;
     }
 
@@ -96,10 +130,7 @@
       padding: 0 1rem;
       display: flex;
       align-items: center;
-      
-      /* DESKTOP: Center the links */
       justify-content: center; 
-      
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       min-height: 60px; 
       transition: background-color 0.3s ease;
@@ -139,11 +170,8 @@
       font-family: inherit;
       font-weight: 600;
       transition: background 0.2s;
-
-      /* DESKTOP: Pin to the far right */
       position: absolute;
       right: 1rem; 
-      /* Center vertical */
       top: 50%;
       transform: translateY(-50%);
     }
@@ -250,30 +278,26 @@
 
       .menu-toggle { 
         display: block; 
-        order: 1; /* Left */
+        order: 1; 
       }
 
       #theme-toggle {
-        order: 2; /* Right */
-        /* Resetting the desktop absolute positioning so it behaves normally on mobile */
+        order: 2; 
         position: static;
         transform: none;
         margin-left: 0;
       }
 
       .nav-links { 
-        order: 3; /* Bottom */
+        order: 3; 
         display: flex; 
         flex-direction: column; 
         width: 100%; 
-        
-        /* Animation properties */
         max-height: 0;
         opacity: 0;
         overflow: hidden; 
         margin-top: 0;
         transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s;
-        
         align-items: center; 
         gap: 1.5rem; 
       }
