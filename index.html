@@ -12,9 +12,8 @@
     /* --- THEME VARIABLES --- */
     :root {
       /* 1. IMAGE CONFIGURATION */
-      /* Make sure you have these two files in your folder! */
       --banner-light: url('fuji_pic_small.jpg'); 
-      --banner-dark: url('shibuya_scramble2.jpg'); /* <--- CHANGE THIS to your night photo filename */
+      --banner-dark: url('fuji_night.jpg'); /* If you don't have this file, it will just be dark grey */
 
       --bg-color: #eef2f5;
       --text-color: #333;
@@ -49,7 +48,8 @@
       margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background-color 0.4s ease, color 0.4s ease;
+      /* Slowed down to 0.8s for a smoother feel */
+      transition: background-color 0.8s ease, color 0.8s ease;
       line-height: 1.6;
     }
 
@@ -63,7 +63,6 @@
       position: relative;
       width: 100%;
       height: 280px;
-      /* Uses the variable for the Light Image */
       background: var(--banner-light) no-repeat center center;
       background-size: cover;
       display: flex;
@@ -74,7 +73,6 @@
     }
 
     /* 2. BANNER NIGHT LAYER (Layer 2: The Night Image) */
-    /* This sits on top of the day image but is invisible (opacity 0) by default */
     .banner::before {
       content: '';
       position: absolute;
@@ -84,19 +82,18 @@
       height: 100%;
       background: var(--banner-dark) no-repeat center center;
       background-size: cover;
-      opacity: 0; /* Hidden initially */
-      transition: opacity 0.5s ease-in-out; /* Smooth cross-fade */
+      opacity: 0; 
+      /* Slowed down to 1.5s for a cinematic fade */
+      transition: opacity 1.5s ease-in-out; 
       z-index: 0; 
     }
 
     /* 3. DARK MODE TRIGGER */
-    /* When dark mode is active, make the night layer visible */
     body.dark-mode .banner::before {
       opacity: 1;
     }
 
     /* 4. OVERLAY (Layer 3: The Dimming Color) */
-    /* This sits on top of both images to darken them for text readability */
     .banner::after {
       content: '';
       position: absolute;
@@ -105,7 +102,8 @@
       width: 100%;
       height: 100%;
       background-color: var(--banner-overlay-color);
-      transition: background-color 0.5s ease;
+      /* Slowed down to 1.5s to match the image fade */
+      transition: background-color 1.5s ease;
       z-index: 1; 
     }
 
@@ -117,7 +115,7 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       margin: 0;
       letter-spacing: 1px;
-      z-index: 2; /* Must be highest to sit on top of everything */
+      z-index: 2; 
       position: relative;
     }
 
@@ -133,7 +131,8 @@
       justify-content: center; 
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       min-height: 60px; 
-      transition: background-color 0.3s ease;
+      /* Slowed down to 0.8s */
+      transition: background-color 0.8s ease;
     }
 
     .nav-links { display: flex; gap: 2rem; align-items: center; }
@@ -194,7 +193,8 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border-color);
       overflow: hidden; 
-      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      /* Slowed down to 0.8s */
+      transition: background-color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
     }
 
     h2 {
@@ -204,14 +204,16 @@
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--border-color);
       color: var(--text-color);
-      transition: border-color 0.3s ease, color 0.3s ease;
+      /* Slowed down to 0.8s */
+      transition: border-color 0.8s ease, color 0.8s ease;
     }
 
     .note-item {
       margin-bottom: 1rem;
       padding-left: 1rem;
       border-left: 3px solid var(--accent-color);
-      transition: border-color 0.3s ease;
+      /* Slowed down to 0.8s */
+      transition: border-color 0.8s ease;
     }
 
     #about {
@@ -418,9 +420,7 @@
   </main>
 
   <footer>
-    <em>Light Banner: Mt. Fuji from Arakurayama Sengen Park (April 28, 2024), taken by me.</em>
-    <br>
-    <em>Dark Banner: Shibuya scramble crossing from Shibuya Sky (May 17, 2024), taken by me.</em>
+    <em>Banner: Mt. Fuji from Arakurayama Sengen Park (April 28, 2024), taken by me.</em>
     <br>
     <em>Headshot: taken by <a href="https://photosbycheryl.com/" target="_blank" rel="noopener noreferrer">Photos by Cheryl</a>.</em>
   </footer>
