@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /CV_dec_2025.pdf
+Disallow: /Complex_Workshop_Winter__26_jan8.pdf
+Disallow: /MFE_I_Extra_Pratice_nov20.pdf
+Disallow: /grd_hons_thesis.pdf
+Disallow: /nyu_grad_topology_i_notes.pdf
+Disallow: /nyu_math_society_talk.pdf
+Disallow: /nyu_student_analysis_seminar_feb23.pdf
