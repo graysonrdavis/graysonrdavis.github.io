@@ -214,6 +214,28 @@
       transition: border-color 0.8s ease;
     }
 
+    .recitation-notes {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--accent-color);
+      transition: border-color 0.8s ease;
+    }
+
+    .recitation-notes summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+
+    .recitation-notes summary:hover {
+      color: var(--link-hover);
+    }
+
+    .recitation-list {
+      margin-top: 0.75rem;
+      padding-left: 1.25rem;
+    }
+
     #about {
       display: flex;
       gap: 2.5rem;
@@ -267,6 +289,7 @@
       #about { flex-direction: column; text-align: center; align-items: center; }
       #about img { margin-bottom: 1rem; width: 150px; height: 150px; }
       .note-item { border-left: none; padding-left: 0; margin-bottom: 1.5rem; }
+      .recitation-notes { border-left: none; padding-left: 0; margin-bottom: 1.5rem; }
     }
 
     @media (max-width: 600px) {
@@ -361,14 +384,15 @@
 
     <section id="notes">
       <h2>Notes</h2>
-      <div class="note-item">
-        <div class="note-item">
-        <a href="HA_I_Recitation_2.pdf" target="_blank" rel="noopener noreferrer">Honors Analysis I Recitation Notes</a><br>
-        <small>Recitation 2 - Sep. 18, 2026 (NYU)</small>
-      </div>
-        <a href="HA_I_Recitation_1.pdf" target="_blank" rel="noopener noreferrer">Honors Analysis I Recitation Notes</a><br>
-        <small>Recitation 1 - Sep. 11, 2026 (NYU)</small>
-      </div>
+      <details class="recitation-notes">
+        <summary>Honours Analysis I Recitation Notes</summary>
+        <div class="recitation-list">
+          <a href="HA_I_Recitation_2.pdf" target="_blank" rel="noopener noreferrer">Recitation 2</a><br>
+          <small>Sep. 18, 2026 (NYU)</small><br><br>
+          <a href="HA_I_Recitation_1.pdf" target="_blank" rel="noopener noreferrer">Recitation 1</a><br>
+          <small>Sep. 11, 2026 (NYU)</small>
+        </div>
+      </details>
       <div class="note-item">
         <a href="Complex_Workshop_May_26.pdf" target="_blank" rel="noopener noreferrer">Complex Variables Workshop</a><br>
         <small>Typed notes - Updated May 14, 2026 (NYU)</small>
