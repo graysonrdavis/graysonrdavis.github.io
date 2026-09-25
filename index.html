@@ -236,32 +236,6 @@
       padding-left: 1.25rem;
     }
 
-    /* `details` normally reveals its contents in a single layout frame.  Let
-       the list grow into place when the recitation notes are opened. */
-    .recitation-notes[open] .recitation-list {
-      animation: reveal-recitation-notes 320ms ease-out both;
-    }
-
-    @keyframes reveal-recitation-notes {
-      from {
-        max-height: 0;
-        margin-top: 0;
-        opacity: 0;
-        overflow: hidden;
-      }
-      to {
-        max-height: 14rem;
-        opacity: 1;
-        overflow: hidden;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .recitation-notes[open] .recitation-list {
-        animation: none;
-      }
-    }
-
     #about {
       display: flex;
       gap: 2.5rem;
@@ -537,6 +511,61 @@
         themeToggleBtn.textContent = "🌙 Dark Mode";
         localStorage.setItem('theme', 'light');
       }
+    });
+
+    // Animate both directions of the recitation-notes disclosure.  Native
+    // <details> closing hides its contents immediately, so it needs a small
+    // amount of control to let the height transition finish first.
+    document.querySelectorAll('.recitation-notes').forEach(details => {
+      const summary = details.querySelector('summary');
+      let animation;
+      let isClosing = false;
+
+      summary.addEventListener('click', event => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        event.preventDefault();
+        animation?.cancel();
+
+        const startHeight = details.offsetHeight;
+
+        if (details.open && !isClosing) {
+          isClosing = true;
+          const endHeight = summary.offsetHeight;
+          details.style.height = `${startHeight}px`;
+          details.style.overflow = 'hidden';
+
+          requestAnimationFrame(() => {
+            animation = details.animate(
+              { height: [`${startHeight}px`, `${endHeight}px`] },
+              { duration: 320, easing: 'ease-in-out' }
+            );
+            animation.onfinish = () => {
+              details.open = false;
+              isClosing = false;
+              details.style.height = '';
+              details.style.overflow = '';
+            };
+          });
+        } else {
+          isClosing = false;
+          details.style.height = `${startHeight}px`;
+          details.style.overflow = 'hidden';
+          details.open = true;
+
+          requestAnimationFrame(() => {
+            const endHeight = details.scrollHeight;
+            animation = details.animate(
+              { height: [`${startHeight}px`, `${endHeight}px`] },
+              { duration: 320, easing: 'ease-in-out' }
+            );
+            animation.onfinish = () => {
+              details.style.height = '';
+              details.style.overflow = '';
+            };
+          });
+        }
+      });
     });
   </script>
 
