@@ -236,6 +236,32 @@
       padding-left: 1.25rem;
     }
 
+    /* `details` normally reveals its contents in a single layout frame.  Let
+       the list grow into place when the recitation notes are opened. */
+    .recitation-notes[open] .recitation-list {
+      animation: reveal-recitation-notes 320ms ease-out both;
+    }
+
+    @keyframes reveal-recitation-notes {
+      from {
+        max-height: 0;
+        margin-top: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+      to {
+        max-height: 14rem;
+        opacity: 1;
+        overflow: hidden;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .recitation-notes[open] .recitation-list {
+        animation: none;
+      }
+    }
+
     #about {
       display: flex;
       gap: 2.5rem;
@@ -387,35 +413,37 @@
       <details class="recitation-notes">
         <summary>Honours Analysis I Recitation Notes</summary>
         <div class="recitation-list">
+          <a href="HA_I_Recitation_2.pdf" target="_blank" rel="noopener noreferrer">Recitation 3</a><br>
+          <small>Sep. 25, 2026</small><br><br>
           <a href="HA_I_Recitation_2.pdf" target="_blank" rel="noopener noreferrer">Recitation 2</a><br>
-          <small>Sep. 18, 2026 (NYU)</small><br><br>
+          <small>Sep. 18, 2026</small><br><br>
           <a href="HA_I_Recitation_1.pdf" target="_blank" rel="noopener noreferrer">Recitation 1</a><br>
-          <small>Sep. 11, 2026 (NYU)</small>
+          <small>Sep. 11, 2026</small>
         </div>
       </details>
       <div class="note-item">
         <a href="Complex_Workshop_May_26.pdf" target="_blank" rel="noopener noreferrer">Complex Variables Workshop</a><br>
-        <small>Typed notes - Updated May 14, 2026 (NYU)</small>
+        <small>Typed notes - Updated May 14, 2026</small>
       </div>
       <div class="note-item">
         <a href="nyu_student_analysis_seminar_feb23.pdf" target="_blank" rel="noopener noreferrer">NYU Student Analysis Seminar Talk</a><br>
-        <small>Typed notes - Feb. 23, 2026 (NYU)</small>
+        <small>Typed notes - Feb. 23, 2026</small>
       </div>
       <!-- <div class="note-item">
         <a href="MFE_I_Extra_Practice_nov20.pdf" target="_blank" rel="noopener noreferrer">MATH-UA 131 MFE I Extra Questions</a><br>
-        <small>Updated Nov. 20, 2025 (NYU)</small>
+        <small>Updated Nov. 20, 2025</small>
       </div> -->
       <div class="note-item">
         <a href="nyu_math_society_talk.pdf" target="_blank" rel="noopener noreferrer">NYU Math Society Academic Talk Oct. 1, 2025</a><br>
-        <small>Handwritten notes (NYU)</small>
+        <small>Handwritten notes</small>
       </div>
       <div class="note-item">
         <a href="nyu_grad_topology_i_notes.pdf" target="_blank" rel="noopener noreferrer">MATH-GA 2310 Topology I</a><br>
-        <small>Typed notes (NYU)</small>
+        <small>Typed notes</small>
       </div>
       <div class="note-item">
         <a href="grd_hons_thesis.pdf" target="_blank" rel="noopener noreferrer">Finite Element Approximation of the Modified Steklov-Maxwell Eigenproblem</a><br>
-        <small>Honours Thesis, advised by Professor Nilima Nigam (SFU)</small>
+        <small>Honours Thesis (SFU)</small>
       </div>
     </section>
 
